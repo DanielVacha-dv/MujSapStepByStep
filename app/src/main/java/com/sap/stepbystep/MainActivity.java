@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onRegister(View view) {
         Log.d(myTag, "In onRegister");
-        Log.d(myTag, "In onRegister");
         myOkHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new AppHeadersInterceptor(appID, deviceID, "1.0"))
                 .authenticator(new BasicAuthDialogAuthenticator())

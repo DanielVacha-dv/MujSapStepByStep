@@ -1,35 +1,72 @@
 package com.sap.stepbystep;
 
+import android.content.DialogInterface;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-//import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.appcompat.app.AlertDialog;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.webkit.CookieManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sap.cloud.mobile.foundation.authentication.BasicAuthDialogAuthenticator;
+import com.sap.cloud.mobile.foundation.authentication.OAuth2BrowserProcessor;
+import com.sap.cloud.mobile.foundation.authentication.OAuth2Configuration;
+import com.sap.cloud.mobile.foundation.authentication.OAuth2Interceptor;
+import com.sap.cloud.mobile.foundation.authentication.OAuth2WebViewProcessor;
+import com.sap.cloud.mobile.foundation.common.ClientProvider;
+import com.sap.cloud.mobile.foundation.common.EncryptionError;
+import com.sap.cloud.mobile.foundation.common.EncryptionUtil;
 import com.sap.cloud.mobile.foundation.common.SettingsParameters;
+import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationLoader;
+import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationLoaderCallback;
+import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationPersistenceException;
+import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationProvider;
+import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationProviderError;
+import com.sap.cloud.mobile.foundation.configurationprovider.DefaultPersistenceMethod;
+import com.sap.cloud.mobile.foundation.configurationprovider.DiscoveryServiceConfigurationProvider;
+import com.sap.cloud.mobile.foundation.configurationprovider.FileConfigurationProvider;
+import com.sap.cloud.mobile.foundation.configurationprovider.ProviderIdentifier;
+import com.sap.cloud.mobile.foundation.configurationprovider.ProviderInputs;
+import com.sap.cloud.mobile.foundation.configurationprovider.UserInputs;
+import com.sap.cloud.mobile.foundation.logging.Logging;
 import com.sap.cloud.mobile.foundation.networking.AppHeadersInterceptor;
 import com.sap.cloud.mobile.foundation.networking.WebkitCookieJar;
+import com.sap.cloud.mobile.foundation.securestore.OpenFailureException;
+import com.sap.cloud.mobile.foundation.securestore.SecureKeyValueStore;
 import com.sap.cloud.mobile.foundation.user.UserInfo;
 import com.sap.cloud.mobile.foundation.user.UserRoles;
+import com.sap.cloud.mobile.foundation.usage.AppUsage;
+import com.sap.cloud.mobile.foundation.usage.AppUsageInfo;
+import com.sap.cloud.mobile.foundation.usage.AppUsageUploader;
 
-import org.slf4j.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.core.util.StatusPrinter;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     private String messageToToast;
     private Toast toast;
     private String currentUser;
-    Logger logger = LoggerFactory.getLogger(MainActivity.class);
+    Logger logger = (Logger) LoggerFactory.getLogger(MainActivity.class);
     private Integer numberOfPresses = 0;
     private final String myTag = "myDebuggingTag";
 
@@ -64,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onRegister(View view) {
         Log.d(myTag, "In onRegister");
-        myOkHttpClient = new OkHttpClient.Builder()
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        myOkHttpClient = builder
                 .addInterceptor(new AppHeadersInterceptor(appID, deviceID, "1.0"))
                 .authenticator(new BasicAuthDialogAuthenticator())
                 .cookieJar(new WebkitCookieJar())

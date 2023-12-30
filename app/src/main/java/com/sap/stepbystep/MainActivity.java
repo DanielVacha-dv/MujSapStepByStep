@@ -1,5 +1,7 @@
 package com.sap.stepbystep;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -28,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Set;
 
 import ch.qos.logback.classic.Logger;
 import okhttp3.Call;
@@ -37,6 +40,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements OnlineODataStore.OpenListener {
+
+    protected static SharedPreferences.Editor mDefaultSharedPreferencesEditor = null;
+    protected static SharedPreferences mDefaultSharedPreferences = null;
 
     public static final String TAG = MainActivity.class.getName();
     private OkHttpClient myOkHttpClient;
@@ -56,13 +62,15 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     private final String myTag = "myDebuggingTag";
     public static final String PASS = "mAsset123!";
     public static final String USER = "mAsset123!";
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logger.debug("onCreate");
-        deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+//        deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         setContentView(R.layout.activity_main);
+        SharedPreferences name = getSharedPreferences("NAME", Context.MODE_PRIVATE);
     }
 
     public void onLogALine(View view) {
@@ -77,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     }
 
 
-    private void registerOrig(){
+    private void registerOrig() {
         Log.d(myTag, "In onRegister");
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         myOkHttpClient = builder
@@ -205,5 +213,34 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     @Override
     public void storeOpenError(ODataException e) {
         Log.d(TAG, "Store storeOpenError");
+    }
+
+    public static void removeDefaultSharedPreferences(String key) {
+        mDefaultSharedPreferencesEditor.remove(key);
+        mDefaultSharedPreferencesEditor.commit();
+    }
+
+    public static Set<String> getDefaultSharedPreferencesStringSet(String key, Set<String> defaultValue) {
+        return mDefaultSharedPreferences.getStringSet(key, defaultValue);
+    }
+
+    public static void setDefaultSharedPreferences(String key, Set<String> value) {
+        mDefaultSharedPreferencesEditor.putStringSet(key, value);
+        mDefaultSharedPreferencesEditor.commit();
+    }
+
+    /**
+     * Save key with String value into the default shared preferences.
+     *
+     * @param key
+     * @param value
+     */
+    public static void setDefaultSharedPreferences(String key, String value) {
+        mDefaultSharedPreferencesEditor.putString(key, value);
+        mDefaultSharedPreferencesEditor.commit();
+    }
+
+    public static String getDefaultSharedPreferencesString(String key, String defaultValue) {
+        return mDefaultSharedPreferences.getString(key, defaultValue);
     }
 }

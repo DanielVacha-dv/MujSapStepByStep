@@ -7,6 +7,7 @@
         android:usesCleartextTraffic="true"
         android:name=".MyApplication"
         android:allowBackup="false"
+        android:fullBackupContent="false"
         android:exported="true"
         tools:replace="android:allowBackup"
         android:icon="@mipmap/ic_launcher"

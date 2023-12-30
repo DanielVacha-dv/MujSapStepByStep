@@ -4,6 +4,7 @@
     package="com.sap.stepbystep">
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".MyApplication"
         android:allowBackup="false"
         android:exported="true"

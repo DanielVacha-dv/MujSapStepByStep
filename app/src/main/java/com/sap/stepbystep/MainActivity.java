@@ -1,93 +1,67 @@
 package com.sap.stepbystep;
 
-import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.CookieManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.sap.cloud.mobile.foundation.authentication.BasicAuthCredentialStore;
 import com.sap.cloud.mobile.foundation.authentication.BasicAuthDialogAuthenticator;
-import com.sap.cloud.mobile.foundation.authentication.OAuth2BrowserProcessor;
-import com.sap.cloud.mobile.foundation.authentication.OAuth2Configuration;
-import com.sap.cloud.mobile.foundation.authentication.OAuth2Interceptor;
-import com.sap.cloud.mobile.foundation.authentication.OAuth2WebViewProcessor;
-import com.sap.cloud.mobile.foundation.common.ClientProvider;
-import com.sap.cloud.mobile.foundation.common.EncryptionError;
-import com.sap.cloud.mobile.foundation.common.EncryptionUtil;
 import com.sap.cloud.mobile.foundation.common.SettingsParameters;
-import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationLoader;
-import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationLoaderCallback;
-import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationPersistenceException;
-import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationProvider;
-import com.sap.cloud.mobile.foundation.configurationprovider.ConfigurationProviderError;
-import com.sap.cloud.mobile.foundation.configurationprovider.DefaultPersistenceMethod;
-import com.sap.cloud.mobile.foundation.configurationprovider.DiscoveryServiceConfigurationProvider;
-import com.sap.cloud.mobile.foundation.configurationprovider.FileConfigurationProvider;
-import com.sap.cloud.mobile.foundation.configurationprovider.ProviderIdentifier;
-import com.sap.cloud.mobile.foundation.configurationprovider.ProviderInputs;
-import com.sap.cloud.mobile.foundation.configurationprovider.UserInputs;
-import com.sap.cloud.mobile.foundation.logging.Logging;
 import com.sap.cloud.mobile.foundation.networking.AppHeadersInterceptor;
 import com.sap.cloud.mobile.foundation.networking.WebkitCookieJar;
-import com.sap.cloud.mobile.foundation.securestore.OpenFailureException;
-import com.sap.cloud.mobile.foundation.securestore.SecureKeyValueStore;
 import com.sap.cloud.mobile.foundation.user.UserInfo;
 import com.sap.cloud.mobile.foundation.user.UserRoles;
-import com.sap.cloud.mobile.foundation.usage.AppUsage;
-import com.sap.cloud.mobile.foundation.usage.AppUsageInfo;
-import com.sap.cloud.mobile.foundation.usage.AppUsageUploader;
+import com.sap.smp.client.odata.exception.ODataException;
+import com.sap.smp.client.odata.online.OnlineODataStore;
+import com.sap.stepbystep.smf.repository.SMFLoginRepository;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
 
-import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
-import ch.qos.logback.core.util.StatusPrinter;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnlineODataStore.OpenListener {
 
+    public static final String TAG = MainActivity.class.getName();
     private OkHttpClient myOkHttpClient;
     private String deviceID;
-    private final String serviceURL = "http://nwgw.kctdata.cz";  //change p1743065160
-    private final String appID = "com.sap.stepbystep";
-    private final String connectionID = "/sap/opu/odata/KCT/MA2_SRV;v=3";
-    //    private final String connectionID = "com.sap.edm.sampleservice.v2";
+    public static final String SERVICE_PROTOCOL = "http";
+    public static final String SERVER = "nwgw.kctdata.cz";
+    public static final String PORT = "80";
+    public static final String SERVICE = "/sap/opu/odata/KCT/MA2_SRV;v=3";
+    public static final String serviceURL = "http://nwgw.kctdata.cz";
+    public static final String appID = "com.sap.stepbystep";
+    public static final String connectionID = "/sap/opu/odata/KCT/MA2_SRV;v=3";
     private String messageToToast;
     private Toast toast;
     private String currentUser;
     Logger logger = (Logger) LoggerFactory.getLogger(MainActivity.class);
     private Integer numberOfPresses = 0;
     private final String myTag = "myDebuggingTag";
+    public static final String PASS = "mAsset123!";
+    public static final String USER = "mAsset123!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logger.debug("onCreate");
+        deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         setContentView(R.layout.activity_main);
     }
 
@@ -95,10 +69,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d(myTag, "In onLogALine");
         numberOfPresses = numberOfPresses + 1;
         Log.d(myTag, "Button pressed " + numberOfPresses + " times");
-        logger.debug("In onLogALine "+numberOfPresses);
+        logger.debug("In onLogALine " + numberOfPresses);
     }
 
     public void onRegister(View view) {
+        SMFLoginRepository.login(this, this);
+    }
+
+
+    private void registerOrig(){
         Log.d(myTag, "In onRegister");
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         myOkHttpClient = builder
@@ -126,8 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     toastAMessage("Successfully authenticated");
                     enableButtonsOnRegister(true);
                     getUser();
-                }
-                else { //called if the credentials are incorrect
+                } else { //called if the credentials are incorrect
                     Log.d(myTag, "Registration failed " + response.networkResponse());
                     toastAMessage("Registration failed " + response.networkResponse());
                 }
@@ -154,8 +132,7 @@ public class MainActivity extends AppCompatActivity {
     private void toastAMessage(String msg) {
         if (toast != null && toast.getView().isShown()) {
             msg = messageToToast + "\n" + msg;
-        }
-        else {  //clear any previously shown toasts that have since stopped being displayed
+        } else {  //clear any previously shown toasts that have since stopped being displayed
             messageToToast = "";
         }
         messageToToast = msg;
@@ -180,8 +157,7 @@ public class MainActivity extends AppCompatActivity {
         SettingsParameters sp = null;
         try {
             sp = new SettingsParameters(serviceURL, appID, deviceID, "1.0");
-        }
-        catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         UserRoles roles = new UserRoles(myOkHttpClient, sp);
@@ -192,8 +168,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(myTag, "User Id: " + ui.getId());
                 String[] roleList = ui.getRoles();
                 Log.d(myTag, "User has the following Roles");
-                for (int i=0; i < roleList.length; i++) {
-                    Log.d(myTag, "Role Name " + roleList[i]);
+                for (String s : roleList) {
+                    Log.d(myTag, "Role Name " + s);
                 }
                 currentUser = ui.getId();
                 toastAMessage("Currently logged with " + ui.getId());
@@ -219,5 +195,15 @@ public class MainActivity extends AppCompatActivity {
                 onlineODataButton.setEnabled(enable);
             }
         });
+    }
+
+    @Override
+    public void storeOpened(OnlineODataStore onlineODataStore) {
+        Log.d(TAG, "Store opened");
+    }
+
+    @Override
+    public void storeOpenError(ODataException e) {
+        Log.d(TAG, "Store storeOpenError");
     }
 }

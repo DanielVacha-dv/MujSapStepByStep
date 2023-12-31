@@ -2,6 +2,7 @@ package com.sap.stepbystep.smf.repository;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.sap.maf.tools.logon.core.LogonCore;
 import com.sap.smp.client.odata.online.OnlineODataStore;
 import com.sap.stepbystep.kmf.store.error.KMFOnlineODataStoreException;
@@ -18,12 +19,13 @@ public class SMFLoginRepository {
         Log.d(TAG, "login(Context context, IKMFResponseHandler responseHandler)");
 
         try {
+            LogonCore.getInstance().init(context, context.getPackageName());
             LogonCore.getInstance().getLogonContext();
         } catch (Exception ex) {
-                ex.printStackTrace();
+            ex.printStackTrace();
 
         }
-            openOnlineStoreAsync(context, listener);
+        openOnlineStoreAsync(context, listener);
 
     }
 

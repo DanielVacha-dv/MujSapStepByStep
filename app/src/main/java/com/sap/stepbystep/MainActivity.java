@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -22,14 +24,22 @@ import com.sap.cloud.mobile.foundation.networking.AppHeadersInterceptor;
 import com.sap.cloud.mobile.foundation.networking.WebkitCookieJar;
 import com.sap.cloud.mobile.foundation.user.UserInfo;
 import com.sap.cloud.mobile.foundation.user.UserRoles;
+import com.sap.maf.tools.logon.core.LogonCore;
 import com.sap.smp.client.odata.exception.ODataException;
 import com.sap.smp.client.odata.online.OnlineODataStore;
+import com.sap.smp.client.supportability.ClientLogDestination;
+import com.sap.smp.client.supportability.ClientLogLevel;
+import com.sap.smp.client.supportability.ClientLogManager;
+import com.sap.smp.client.supportability.ClientLogger;
+import com.sap.smp.client.supportability.Supportability;
+import com.sap.stepbystep.kmf.data.KMFPreferences;
 import com.sap.stepbystep.smf.repository.SMFLoginRepository;
 
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.EnumSet;
 import java.util.Set;
 
 import ch.qos.logback.classic.Logger;
@@ -57,72 +67,53 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     private String messageToToast;
     private Toast toast;
     private String currentUser;
-    Logger logger = (Logger) LoggerFactory.getLogger(MainActivity.class);
+    //    Logger logger = (Logger) LoggerFactory.getLogger(MainActivity.class);
     private Integer numberOfPresses = 0;
     private final String myTag = "myDebuggingTag";
     public static final String PASS = "mAsset123!";
     public static final String USER = "mAsset123!";
     SharedPreferences.Editor editor;
+    KMFPreferences preferences;
+
+    private static ClientLogger logger = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        logger.debug("onCreate");
-//        deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        getClientLogger(getApplicationContext());
+        Log.d(TAG,"onCreate");
         setContentView(R.layout.activity_main);
-        SharedPreferences name = getSharedPreferences("NAME", Context.MODE_PRIVATE);
+        mDefaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        mDefaultSharedPreferencesEditor = mDefaultSharedPreferences.edit();
+
+    }
+
+
+    public  ClientLogger getClientLogger(Context ctx) {
+        if (logger == null) {
+            LogonCore logonCore= LogonCore.getInstance();
+            logonCore.init(ctx, ctx.getPackageName());
+//            Supportability.getInstance().
+            ClientLogManager logManager = Supportability.getInstance().getClientLogManager(ctx);
+            logManager.setLogDestination(EnumSet.of(ClientLogDestination.CONSOLE, ClientLogDestination.FILESYSTEM));
+            logger = logManager.getLogger("logger");
+            logManager.setLogLevel(ClientLogLevel.INFO, "logger");
+        }
+
+        return logger;
     }
 
     public void onLogALine(View view) {
         Log.d(myTag, "In onLogALine");
         numberOfPresses = numberOfPresses + 1;
         Log.d(myTag, "Button pressed " + numberOfPresses + " times");
-        logger.debug("In onLogALine " + numberOfPresses);
     }
 
     public void onRegister(View view) {
         SMFLoginRepository.login(this, this);
     }
-
-
-    private void registerOrig() {
-        Log.d(myTag, "In onRegister");
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        myOkHttpClient = builder
-                .addInterceptor(new AppHeadersInterceptor(appID, deviceID, "1.0"))
-                .authenticator(new BasicAuthDialogAuthenticator())
-                .cookieJar(new WebkitCookieJar())
-                .build();
-
-        Request request = new Request.Builder()
-                .get()
-                .url(serviceURL + "/" + connectionID + "/")
-                .build();
-
-        Callback updateUICallback = new Callback() {
-            @Override
-            public void onFailure(Call call, final IOException e) { //called if there is no network
-                Log.d(myTag, "onFailure called during authentication " + e.getMessage());
-                toastAMessage("Registration failed " + e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    Log.d(myTag, "Successfully authenticated");
-                    toastAMessage("Successfully authenticated");
-                    enableButtonsOnRegister(true);
-                    getUser();
-                } else { //called if the credentials are incorrect
-                    Log.d(myTag, "Registration failed " + response.networkResponse());
-                    toastAMessage("Registration failed " + response.networkResponse());
-                }
-            }
-        };
-
-        myOkHttpClient.newCall(request).enqueue(updateUICallback);
-    }
-
 
     public void onUploadLog(View view) {
         Log.d(myTag, "In onUploadLog");
@@ -176,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
                 Log.d(myTag, "User Id: " + ui.getId());
                 String[] roleList = ui.getRoles();
                 Log.d(myTag, "User has the following Roles");
+                assert roleList != null;
                 for (String s : roleList) {
                     Log.d(myTag, "Role Name " + s);
                 }
@@ -193,8 +185,8 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     }
 
     private void enableButtonsOnRegister(final boolean enable) {
-        final Button uploadLogButton = (Button) findViewById(R.id.b_uploadLog);
-        final Button onlineODataButton = (Button) findViewById(R.id.b_odata);
+        final Button uploadLogButton = findViewById(R.id.b_uploadLog);
+        final Button onlineODataButton = findViewById(R.id.b_odata);
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -232,8 +224,8 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     /**
      * Save key with String value into the default shared preferences.
      *
-     * @param key
-     * @param value
+     * @param key key
+     * @param value value
      */
     public static void setDefaultSharedPreferences(String key, String value) {
         mDefaultSharedPreferencesEditor.putString(key, value);

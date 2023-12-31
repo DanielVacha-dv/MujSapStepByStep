@@ -16,20 +16,20 @@ public class KMFPreferences {
      * Get data from shared preferences.
      */
     protected void getPreferencesFromSharedPreferences() {
-        mProfileId = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_PROFILE, null);
-        mUseSMP = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_USE_SMP, null);
-        mUseTechnicalUser = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_USE_TECHNICAL_USER, null);
-        mProtocol = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_PROTOCOL, null);
-        mServer = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_SERVER, null);
-        mPort = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_PORT, null);
-        mClient = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_CLIENT, null);
-        mLanguage = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_LANGUAGE, null);
-        mService = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_SERVICE, null);
-        mUser = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_USER, null);
-        mPassword = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_PASSWORD, null);
-        mApplicationConnectionId = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_AAP_CONN_ID, null);
-        mSigned = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_SIGNED, null);
-        mCrashedLogCreated = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_CRASHED_LOG_CREATED, null);
+        mProfileId = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_PROFILE, "");
+        mUseSMP = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_USE_SMP, "");
+        mUseTechnicalUser = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_USE_TECHNICAL_USER, "");
+        mProtocol = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_PROTOCOL, "");
+        mServer = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_SERVER, "");
+        mPort = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_PORT, "");
+        mClient = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_CLIENT, "");
+        mLanguage = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_LANGUAGE, "");
+        mService = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_SERVICE, "");
+        mUser = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_USER, "");
+        mPassword = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_PASSWORD, "");
+        mApplicationConnectionId = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_AAP_CONN_ID, "");
+        mSigned = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_SIGNED, "");
+        mCrashedLogCreated = getPreferenceValueFromSharedPreferences(KMFSPConstants.SPC_CRASHED_LOG_CREATED, "");
     }
 
     /**
@@ -290,13 +290,13 @@ public class KMFPreferences {
      * @return true or false
      */
     public Boolean isSigned() {
-        return (mSigned == null) ? false : Boolean.valueOf(mSigned);
+        return (mSigned != null) && Boolean.parseBoolean(mSigned);
     }
 
     /**
      * Set crashed log created.
      *
-     * @param crashedLogCreated
+     * @param crashedLogCreated crashedLogCreated
      */
     public void setCrashedLogCreated(Boolean crashedLogCreated) {
         mCrashedLogCreated = crashedLogCreated.toString();
@@ -305,7 +305,7 @@ public class KMFPreferences {
     /**
      * Get crashed log created.
      *
-     * @return
+     * @return return
      */
     public String getCrashedLogCreated(){
         return mCrashedLogCreated;
@@ -314,10 +314,10 @@ public class KMFPreferences {
     /**
      * Is crashed log created.
      *
-     * @return
+     * @return true
      */
     public Boolean isCrashedLogCreated(){
-        return (mCrashedLogCreated == null) ? false : Boolean.valueOf(mCrashedLogCreated);
+        return (mCrashedLogCreated != null) && Boolean.parseBoolean(mCrashedLogCreated);
     }
 
     /**

@@ -171,11 +171,11 @@ public class KMFOnlineManager extends KMFManager {
                     options.format = OnlineODataStore.PayloadFormatEnum.XML;
                 }
 
-                if (!TextUtils.isEmpty(KMFOnlineManager.cacheEncryptionKey)) {
-                    options.useCache = true;
-                    options.cacheEncryptionKey = KMFOnlineManager.cacheEncryptionKey;
-                }
-
+//                if (!TextUtils.isEmpty(KMFOnlineManager.cacheEncryptionKey)) {
+//                    options.useCache = true;
+//                    options.cacheEncryptionKey = KMFOnlineManager.cacheEncryptionKey;
+//                }
+                options.useCache = true;
                 OnlineODataStore.resetCache(context, url);
                 if (listener == null) {
                     OnlineODataStore.open(context, url, manager, onlineStoreOpenListener, options);

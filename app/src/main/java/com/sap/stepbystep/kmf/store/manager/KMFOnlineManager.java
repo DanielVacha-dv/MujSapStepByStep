@@ -170,11 +170,6 @@ public class KMFOnlineManager extends KMFManager {
                 } else {
                     options.format = OnlineODataStore.PayloadFormatEnum.XML;
                 }
-
-//                if (!TextUtils.isEmpty(KMFOnlineManager.cacheEncryptionKey)) {
-//                    options.useCache = true;
-//                    options.cacheEncryptionKey = KMFOnlineManager.cacheEncryptionKey;
-//                }
                 options.useCache = true;
                 OnlineODataStore.resetCache(context, url);
                 if (listener == null) {

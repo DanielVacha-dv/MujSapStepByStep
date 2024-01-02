@@ -6,7 +6,6 @@ import android.util.Log;
 import com.sap.maf.tools.logon.core.LogonCore;
 import com.sap.smp.client.odata.online.OnlineODataStore;
 import com.sap.stepbystep.kmf.store.error.KMFOnlineODataStoreException;
-import com.sap.stepbystep.kmf.store.interfac.IKMFResponseHandler;
 import com.sap.stepbystep.kmf.store.listener.KMFOnlineStoreOpenListener;
 import com.sap.stepbystep.kmf.store.manager.KMFOnlineManager;
 
@@ -19,7 +18,6 @@ public class SMFLoginRepository {
         Log.d(TAG, "login(Context context, IKMFResponseHandler responseHandler)");
 
         try {
-            LogonCore.getInstance().init(context, context.getPackageName());
             LogonCore.getInstance().getLogonContext();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -38,22 +36,4 @@ public class SMFLoginRepository {
             e.printStackTrace();
         }
     }
-
-//    public static void loginFunctionImport(Context context, IKMFResponseHandler responseHandler) {
-//        Log.d(TAG, "read(Context context, IKMFResponseHandler responseHandler)");
-//
-//        try {
-//            SMFBaseRepository.openOnlineStore(context);
-//        } catch (KMFOnlineODataStoreException e) {
-//            responseHandler.onODataRequestError(SMFStoreOperation.TECHNICAL_USER, e, null);
-//            return;
-//        }
-//        KMFODataRequestBuilder2 requestBuilder = new KMFODataRequestBuilder2(context, responseHandler, SMFStoreOperation.TECHNICAL_USER);
-//        requestBuilder.prepareReadRequest(
-//                SMFApplication.getUserData().getEntity2(SMFODataService.NAMESPACE),
-//                SMFApplication.getUserData().getRequestKeys()
-//        );
-//
-//        requestBuilder.execute(KMFStoreOperation.IMPORT_FUNCTION);
-//    }
 }

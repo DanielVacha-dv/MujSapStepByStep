@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.sap.cloud.android:foundation:2.2.4'
     implementation 'org.slf4j:slf4j-api:1.7.28'
     implementation 'com.github.tony19:logback-android:2.0.0'
+    implementation files('libs\\Parser-3.12.9.jar')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

@@ -4,9 +4,12 @@ import android.content.Context;
 import android.util.Log;
 
 import com.sap.stepbystep.data.constants.SMFStoreOperation;
+import com.sap.stepbystep.kmf.android.KMFApplication;
 import com.sap.stepbystep.kmf.odata.KMFODataRequestBuilder2;
+import com.sap.stepbystep.kmf.store.constant.KMFStoreOperation;
 import com.sap.stepbystep.kmf.store.error.KMFOnlineODataStoreException;
 import com.sap.stepbystep.kmf.store.interfac.IKMFResponseHandler;
+import com.sap.stepbystep.smf.data.entity.SMFCodeList;
 
 public class SMFCodeListRepository extends SMFBaseRepository {
     public static final String TAG = SMFCodeListRepository.class.getCanonicalName();
@@ -25,7 +28,7 @@ public class SMFCodeListRepository extends SMFBaseRepository {
         requestBuilder.prepareReadRequest(SMFCodeList.getEmptyODataEntity2());
 
         if (KMFApplication.getConfig().getConfigSettings().getUseTechnicalUser()) {
-            requestBuilder.addHeader(SMFApplication.getUserData().getRequestHeaders());
+            requestBuilder.addHeader(KMFApplication.getUserData().getRequestHeaders());
         }
 
         requestBuilder.execute(KMFStoreOperation.GET_ENTITIES_ASYNC);

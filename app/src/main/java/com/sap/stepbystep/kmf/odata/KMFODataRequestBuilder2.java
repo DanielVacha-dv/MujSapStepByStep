@@ -10,6 +10,8 @@ import com.sap.smp.client.odata.ODataPayload;
 import com.sap.smp.client.odata.store.ODataRequestExecution;
 import com.sap.smp.client.odata.store.ODataResponseSingle;
 import com.sap.stepbystep.R;
+import com.sap.stepbystep.kmf.android.KMFApplication;
+import com.sap.stepbystep.kmf.data.KMFConfigPreferences;
 import com.sap.stepbystep.kmf.store.error.KMFOnlineODataStoreException;
 import com.sap.stepbystep.kmf.store.interfac.IKMFResponseHandler;
 

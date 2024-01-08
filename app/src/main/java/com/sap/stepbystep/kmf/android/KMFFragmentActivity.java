@@ -20,10 +20,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.honeywell.scanintent.ScanIntent;
+import com.sap.stepbystep.BuildConfig;
+import com.sap.stepbystep.R;
 import com.sap.stepbystep.kmf.app.KMFDevices;
 import com.sap.stepbystep.kmf.reader.KMFReaderCN51;
 import com.sap.stepbystep.kmf.ui.KMFDialogAlert;

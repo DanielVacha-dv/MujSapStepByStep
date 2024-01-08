@@ -3,4 +3,60 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="black">#000000</color>
+    <color name="gray_brightness20">#333333</color>
+    <color name="gray_brightness38">#606060</color>
+    <color name="gray_brightness50">#7f7f7f</color>
+    <color name="gray_brightness60">#999999</color>
+    <color name="gray_brightness73">#BBBBBB</color>
+    <color name="gray_brightness83">#D4D4D4</color>
+    <color name="gray_brightness90">#E5E5E5</color>
+    <color name="gray_brightness92">#EAEAEA</color>
+    <color name="gray_brightness94">#F0F0F0</color>
+    <color name="gray_brightness95">#F2F2F2</color>
+    <color name="blue">#1E96C9</color>
+    <color name="green">#87A400</color>
+    <color name="orange">#FF7F00</color>
+    <color name="red">#E43421</color>
+    <color name="black_transparent">#19000000</color>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="semiTransparent">#66FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="shadow">#22000000</color>
+    <color name="lightBlue">#add8e6</color>
+
+    <!--Default colors-->
+    <color name="appColor">@color/red</color>
+    <color name="app_color">@color/appColor</color>
+    //@deprecated
+
+    <!-- Actionbar -->
+    <color name="actionBarBackground">@color/gray_brightness92</color>
+    <color name="actionBarLabel">@color/app_color</color>
+    <color name="actionBarSelector">@color/black_transparent</color>
+    <color name="actionBarTextColor">@color/app_color</color>
+    <color name="actionBarOverflow">@color/black</color>
+    <color name="dividerOverflowMenu">@color/gray_brightness20</color>
+
+    <!--Dialog-->
+    <color name="dialogBackground">@color/gray_brightness92</color>
+    <color name="dialogError">@color/red</color>
+    <color name="dialogInfo">@color/blue</color>
+    <color name="dialogQuestion">@color/green</color>
+    <color name="dialogWarning">@color/orange</color>
+    <color name="dialogMessageBackgroundColor">@color/white</color>
+
+    <!-- Button -->
+    <color name="buttonBackgroundStartColor">@color/gray_brightness95</color>
+    <color name="buttonBackgroundEndColod">@color/gray_brightness94</color>
+    <color name="buttonBackgroundEndColorPressed">@color/gray_brightness92</color>
+    <color name="buttonBackgroundStartColorPressed">@color/gray_brightness90</color>
+    <color name="buttonShadow">@color/gray_brightness73</color>
+    <color name="buttonStroke">@color/gray_brightness83</color>
+    <color name="buttonStrokePressed">@color/gray_brightness73</color>
+    <color name="buttonText">@color/gray_brightness38</color>
+    <color name="selector_color">@color/red</color>
+
+    <!-- KMFSquareMenuItem -->
+    <color name="widgetKMFSquareMenuItemImageColor">@color/appColor</color>
 </resources>

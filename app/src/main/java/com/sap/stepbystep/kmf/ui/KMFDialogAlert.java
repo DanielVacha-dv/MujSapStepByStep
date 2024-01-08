@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import com.sap.stepbystep.R;
 import com.sap.stepbystep.kmf.helpers.KMFHelperView;
 import com.sap.stepbystep.kmf.ui.listeners.KMFOnSingleClickListener;
 

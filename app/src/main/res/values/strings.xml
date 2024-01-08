@@ -1,3 +1,49 @@
 <resources>
     <string name="app_name">MujSapStepByStep</string>
+    <!--SplashScreen-->
+    <string name="Logo">"Logo"</string>
+    <string name="Loading">"Loading..."</string>
+
+    <string name="Process_data">"Zpracovávám data."</string>
+    <string name="Wait_please">"Čekejte prosím."</string>
+    <string name="Sending_request_to_server">"Posílám požadavek na server"</string>
+
+    <!--OData-->
+    <string name="No_connections_are_available">"Nejsou k dispozici žádná připojení."</string>
+    <string name="Authorization_error_User_or_password_is_incorrect">"Chyba autorizace. Uživatel nebo heslo není správné."</string>
+    <string name="Failed_to_connect_the_service">"Nepodařilo se připojení ke službě."</string>
+    <string name="If_the_problem_persists_contact_the_application_administrator">"Pokud problém přetrvává, kontaktuje správce aplikace"</string>
+    <string name="HTTP_status_code">"HTTP stavový kód %1$d."</string>
+    <string name="Bad_request">"Chybný požadavek."</string>
+    <string name="Unknown_erros_please_do_debug_and_complete_string_xml">"Neznámá chyba. Prosím proveďte laďění a doplňte string.xml."</string>
+
+    <string name="All_data_will_be_erased">"Všechny data budou vymazány."</string>
+    <string name="Do_you_really_want_to_unregister">"Opravdu si přejete provést odregistraci?"</string>
+
+    <string name="Yes">"Ano"</string>
+    <string name="No">"Ne"</string>
+    <string name="Ok">"Ok"</string>>
+    <string name="Cancel">"Zrušit"</string>
+    <string name="Save">"Uložit"</string>
+    <string name="Skip">"Přeskočit"</string>
+    <string name="Interrupt">"Přerušit"</string>
+    <string name="NA">"N/A"</string>
+    <string name="Error">"Chyba"</string>
+    <string name="Information">"Informace"</string>
+    <string name="Question">"Otázka"</string>
+    <string name="Warning">"Varování"</string>
+    <string name="VersionName">"Verze: %1$s"</string>
+    <string name="Delete">"Smazat"</string>
+
+    <!--PERMISSIONS-->
+    <string name="SomePermissionsWasDenied">"Některá oprávnění byla zakázána"</string>
+    <string name="NeedToGrantAccessPermissions">"Je potřeba povolit v nastavení oprávnění aplikace "</string>
+
+    <!--ERROR-->
+    <string name="ERROR_401">"Jméno nebo heslo není správně (opakujte přihlášení)."</string>
+    <string name="ERROR_403">"Připojení se stejným ID již existuje (kontaktujte správce SMP)."</string>
+    <string name="ERROR_404">"Služba nebyla nalezena."</string>
+    <string name="ERROR_80003">"Vypršel časový limit pro připojení k serveru."</string>
+    <string name="timeout">Server neodpověděl na operaci %1$s v časovém limitu %2$d ms.</string>
+
 </resources>

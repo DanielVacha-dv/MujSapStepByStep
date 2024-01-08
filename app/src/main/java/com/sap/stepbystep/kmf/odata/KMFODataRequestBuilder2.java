@@ -11,9 +11,17 @@ import com.sap.smp.client.odata.store.ODataRequestExecution;
 import com.sap.smp.client.odata.store.ODataResponseSingle;
 import com.sap.stepbystep.R;
 import com.sap.stepbystep.kmf.android.KMFApplication;
+import com.sap.stepbystep.kmf.app.KMFAppConstants;
 import com.sap.stepbystep.kmf.data.KMFConfigPreferences;
+import com.sap.stepbystep.kmf.data.KMFPreferences;
+import com.sap.stepbystep.kmf.helpers.KMFHelperFile;
+import com.sap.stepbystep.kmf.helpers.KMFHelperNetworkInfo;
+import com.sap.stepbystep.kmf.store.constant.KMFStoreOperation;
 import com.sap.stepbystep.kmf.store.error.KMFOnlineODataStoreException;
+import com.sap.stepbystep.kmf.store.error.KMFStoreRequestTimeOutException;
 import com.sap.stepbystep.kmf.store.interfac.IKMFResponseHandler;
+import com.sap.stepbystep.kmf.store.manager.KMFOnlineManager;
+import com.sap.stepbystep.kmf.store.model.KMFMapper;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -282,7 +290,7 @@ public class KMFODataRequestBuilder2 extends KMFODataRequestBuilder implements I
         }
         if (mUseDeltaToken) {
             ODataPayload payload = ((ODataResponseSingle) requestExecution.getResponse()).getPayload();
-            KMFODataDeltaToken.saveDeltaToken(mURLNoDeltaToken, payload);
+//            KMFODataDeltaToken.saveDeltaToken(mURLNoDeltaToken, payload);
         }
         mTimeOutHandler.removeCallbacks(mTimeOutRunnable);
         mODataEntities.addAll(entities);

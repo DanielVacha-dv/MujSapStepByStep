@@ -11,6 +11,7 @@ import com.sap.mobile.lib.parser.IODataProperty;
 import com.sap.mobile.lib.parser.IParserDocument;
 import com.sap.mobile.lib.parser.ODataEntry;
 import com.sap.mobile.lib.parser.ODataLink;
+import com.sap.stepbystep.kmf.android.KMFApplication;
 import com.sap.stepbystep.kmf.helpers.KMFHelperString;
 import com.sap.stepbystep.kmf.helpers.KMFHelperUtilDate;
 

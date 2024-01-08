@@ -8,4 +8,164 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="KMFWidgetSquareMenuItemStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginLeft">@dimen/widgetKMFSquareMenuItemMargin</item>
+        <item name="android:layout_marginTop">@dimen/widgetKMFSquareMenuItemMargin</item>
+        <item name="android:layout_marginRight">@dimen/widgetKMFSquareMenuItemMargin</item>
+        <item name="android:layout_marginBottom">@dimen/widgetKMFSquareMenuItemMargin</item>
+        <item name="android:background">@drawable/square_menu_item_bg</item>
+        <item name="android:layout_weight">.33</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="TextView.KMFSquareMenuItemTitle">
+        <item name="android:textSize">@dimen/widgetKMFSquareMenuItemTitleSize</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.KMFSquareMenuItemSubTitle">
+        <item name="android:textSize">@dimen/widgetKMFSquareMenuItemSubTitleSize</item>
+    </style>
+
+    <style name="TextView.KMFSquareMenuItemImage">
+        <item name="android:textSize">@dimen/widgetKMFSquareMenuItemImageSize</item>
+        <item name="android:layout_width">@dimen/widgetKMFSquareMenuItemImageWidth</item>
+        <item name="android:layout_height">@dimen/widgetKMFSquareMenuItemImageHeight</item>
+        <item name="android:textColor">@color/widgetKMFSquareMenuItemImageColor</item>
+    </style>
+
+    <style name="TextView.KMFSquareMenuItemValue">
+        <item name="android:textSize">@dimen/widgetKMFSquareMenuItemValueSize</item>
+    </style>
+
+    <style name="KMFContextMenuStyle">
+        <item name="android:background">@drawable/context_menu_style_bg</item>
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="TextView" parent="android:Widget.TextView">
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextViewLabel" parent="TextView">
+        <item name="android:textSize">@dimen/textLabelSize</item>
+    </style>
+
+    <style name="TextViewLabel.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextViewValue" parent="TextView">
+        <item name="android:textSize">@dimen/textValueSize</item>
+    </style>
+
+    <style name="TextViewValue.Vertical"/>
+
+    <style name="TextViewValue.Vertical.Small">
+        <item name="android:textSize">@dimen/textValueSmallSize</item>
+    </style>
+
+    <style name="TextViewValue.Vertical.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextViewValue.Horizontal">
+        <item name="android:layout_marginLeft">@dimen/spaceWidth</item>
+    </style>
+
+    <style name="TextViewValue.Horizontal.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextViewValue.Horizontal.Small">
+        <item name="android:textSize">@dimen/textValueSmallSize</item>
+    </style>
+
+    <style name="TextViewValue.Status" parent="TextView">
+        <item name="android:textSize">@dimen/textValueSize</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ActionBar" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:background">@color/black</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="contentInsetStart">0dp</item>
+
+        <item name="actionOverflowButtonStyle">@style/OverFlow</item>
+    </style>
+
+    <style name="OverFlow" parent="Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_action_navigation_more_vert</item>
+    </style>
+
+    <style name="ActionBar.Top">
+        <item name="android:layout_height">@dimen/toolBarTopHeight</item>
+    </style>
+
+    <style name="ActionBar.Top.Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="ActionBar.Top.Text.Left">
+    </style>
+
+    <style name="ActionBar.Top.Text.Right">
+    </style>
+
+    <style name="ActionBar.Bottom">
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:visibility">gone</item>
+    </style>
+    <style name="ActionBarBottomText">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">italic</item>
+
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+
+    <style name="TextViewActionBarBaseTheme" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/actionBarTextColor</item>
+        <item name="android:textSize">@dimen/defaultFontSize</item>
+    </style>
+
+    <style name="ActionBarWidgetTheme" parent="android:style/Theme.Holo">
+        <item name="android:dropDownListViewStyle">
+            @style/ActionBarWidgetThemeDropDownListViewStyle
+        </item>
+        <item name="android:textColor">@color/actionBarOverflow</item>
+        <item name="android:textSize">@dimen/defaultFontSize</item>
+    </style>
+
+    <style name="ActionBarWidgetThemeDropDownListViewStyle" parent="android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:background">@drawable/ab_background</item>
+        <item name="android:listSelector">@drawable/ab_selector</item>
+        <item name="android:dividerPadding">@dimen/dividerPadding</item>
+        <item name="android:textColor">@color/actionBarOverflow</item>
+        <item name="android:divider">@color/dividerOverflowMenu</item>
+        <item name="android:dividerHeight">@dimen/dividerHeight</item>
+    </style>
+
 </resources>

@@ -10,6 +10,7 @@ import com.sap.mobile.lib.request.INetListener;
 import com.sap.mobile.lib.request.IRequest;
 import com.sap.mobile.lib.request.IRequestStateElement;
 import com.sap.mobile.lib.request.IResponse;
+import com.sap.stepbystep.R;
 import com.sap.stepbystep.kmf.android.KMFApplication;
 import com.sap.stepbystep.kmf.app.KMFAppConstants;
 import com.sap.stepbystep.kmf.helpers.KMFHelperString;

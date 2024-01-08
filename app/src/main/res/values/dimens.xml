@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Padding-->
+    <dimen name="appPadding">8dp</dimen>
+    <dimen name="abPaddingLeft">0dp</dimen>
+    <dimen name="abPaddingRight">0dp</dimen>
+
+    <!--Button-->
+    <dimen name="buttonTextSize">16sp</dimen>
+    <dimen name="buttonMinHeight">40dp</dimen>
+    <dimen name="buttonMargin">4dp</dimen>
+    <dimen name="buttonPadding">8dp</dimen>
+
+    <!--Dialog-->
+    <dimen name="dialogTitle">18sp</dimen>
+    <dimen name="dialogMessage">17sp</dimen>
+
+    <!-- Default font -->
+    <dimen name="defaultFontSize">16sp</dimen>
+
+    <!-- Devider -->
+    <dimen name="dividerPadding">2dp</dimen>
+    <dimen name="dividerHeight">1dp</dimen>
+
+    <!--TextView-->
+    <dimen name="textViewLargeTextSize">16sp</dimen>
+    <dimen name="textViewDefaultMarginTop">12dp</dimen>
+
+    <!--KMFSquareMenuItem-->
+    <dimen name="widgetKMFSquareMenuItemShadowSize">2dp</dimen>
+    <dimen name="widgetKMFSquareMenuItemMargin">5dp</dimen>
+    <dimen name="widgetKMFSquareMenuItemPadding">5dp</dimen>
+    <dimen name="widgetKMFSquareMenuItemValueSize">25sp</dimen>
+    <dimen name="widgetKMFSquareMenuItemFontSmallSize">14sp</dimen>
+    <dimen name="widgetKMFSquareMenuItemImageSize">40sp</dimen>
+    <dimen name="widgetKMFSquareMenuItemImageWidth">40dp</dimen>
+    <dimen name="widgetKMFSquareMenuItemImageHeight">40dp</dimen>
+    <dimen name="widgetKMFSquareMenuItemTitleSize">12sp</dimen>
+    <dimen name="widgetKMFSquareMenuItemSubTitleSize">12sp</dimen>
+
+    <!-- KMFToolbarTop -->
+    <dimen name="widgetKMFToolbarTopBackIconSize">30sp</dimen>
+    <dimen name="widgetKMFToolbarTopIconSize">27sp</dimen>
+    <dimen name="widgetKMFToolbarTopBackIconLeftPadding">@dimen/appPadding</dimen>
+    <dimen name="widgetKMFToolbarTopBackIconRightPadding">@dimen/appPadding</dimen>
+
+
+    <!--KMFContextMenuItem-->
+    <dimen name="contextMenuIconSize">20sp</dimen>
+
+    <!--KMFToolbarTop-->
+    <dimen name="toolBarTopHeight">60dp</dimen>
+
+    <dimen name="textLabelSize">18sp</dimen>
+    <dimen name="textValueSize">22sp</dimen>
+    <dimen name="textValueSmallSize">20sp</dimen>
+    <dimen name="textStatusSize">19sp</dimen>
+
+    <dimen name="spaceWidth">8dp</dimen>
+    <dimen name="spaceHeight">8dp</dimen>
+
+</resources>

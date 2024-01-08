@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/progressDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/progressDialogTitleImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/appPadding"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/progressDialogTitleText"
+            style="@style/dialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/progressDialogTitleImage"
+            android:gravity="center_vertical"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/progressDialogMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progressDialogTitle"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBarSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/appPadding"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/progressDialogMessageText"
+            style="@style/dialogMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/progressBarSpinner"
+            android:gravity="center_horizontal|center_vertical"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/progressDialogHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progressDialogMessage"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBarHorizontal"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/appPadding"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/progressDialogHorizontalProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progressBarHorizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/progressDialogHorizontalProgressPercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:padding="@dimen/appPadding"
+                android:textSize="@dimen/dialogTitle"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/progressDialogHorizontalProgressInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:padding="@dimen/appPadding"
+                android:textSize="@dimen/dialogTitle"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/progressDialogButtonCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progressDialogHorizontal"
+        android:text="@string/Cancel"
+        android:visibility="gone" />
+
+</RelativeLayout>

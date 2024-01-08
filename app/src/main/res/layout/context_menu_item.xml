@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlContextMenuItem"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@color/gray_brightness38">
+
+    <RelativeLayout
+        style="@style/KMFContextMenuStyle"
+        android:id="@+id/rlContextMenuItem_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvContextMenuItem_title"
+            style="@style/TextViewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+
+        <cz.kctdata.kmf.wigets.KMFImageTextView
+            android:id="@+id/itvContextMenuItem_image"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/contextMenuIconSize"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/tvContextMenuItem_title"/>
+    </RelativeLayout>
+</LinearLayout>

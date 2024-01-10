@@ -1,0 +1,41 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+        <item name="android:actionBarItemBackground">@drawable/ab_selector</item>
+        <item name="android:actionBarWidgetTheme">@style/ActionBarWidgetTheme</item>
+        <item name="android:buttonStyle">@style/defaultButtonStyle</item>+
+        <item name="android:textViewStyle">@style/TextView</item>
+    </style>
+
+    <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/ab_background</item>
+        <item name="android:backgroundSplit">@drawable/split_background</item>
+        <item name="android:titleTextStyle">@style/TextViewActionBarBaseTheme</item>
+        <item name="android:paddingLeft">@dimen/abPaddingLeft</item>
+        <item name="android:paddingRight">@dimen/abPaddingRight</item>
+    </style>
+
+    <style name="TextViewActionBarBaseTheme" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/actionBarTextColor</item>
+        <item name="android:textSize">@dimen/defaultFontSize</item>
+    </style>
+
+    <style name="ActionBarWidgetTheme" parent="android:style/Theme.Holo">
+        <item name="android:dropDownListViewStyle">
+            @style/ActionBarWidgetThemeDropDownListViewStyle
+        </item>
+        <item name="android:textColor">@color/actionBarOverflow</item>
+        <item name="android:textSize">@dimen/defaultFontSize</item>
+    </style>
+
+    <style name="ActionBarWidgetThemeDropDownListViewStyle" parent="android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:background">@drawable/ab_background</item>
+        <item name="android:listSelector">@drawable/ab_selector</item>
+        <item name="android:dividerPadding">@dimen/dividerPadding</item>
+        <item name="android:textColor">@color/actionBarOverflow</item>
+        <item name="android:divider">@color/dividerOverflowMenu</item>
+        <item name="android:dividerHeight">@dimen/dividerHeight</item>
+    </style>
+
+</resources>

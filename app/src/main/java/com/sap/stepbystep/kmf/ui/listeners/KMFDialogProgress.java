@@ -1,5 +1,6 @@
 package com.sap.stepbystep.kmf.ui.listeners;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.sap.stepbystep.R;
 import com.sap.stepbystep.kmf.helpers.KMFHelperView;
 
 public class KMFDialogProgress {
@@ -74,6 +76,7 @@ public class KMFDialogProgress {
      *
      * @param color
      */
+    @SuppressLint("NewApi")
     public void setTitleImageTint(int color) {
         KMFHelperView.getImageView(mView, progressDialogTitleImage).setColorFilter(color);
     }

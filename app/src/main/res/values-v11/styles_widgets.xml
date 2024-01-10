@@ -1,0 +1,26 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--Default button style-->
+    <style name="defaultButtonStyle" parent="@android:style/Widget.Holo.Light.Button">
+        <item name="android:minHeight">@dimen/buttonMinHeight</item>
+        <item name="android:layout_margin">@dimen/buttonMargin</item>
+        <item name="android:background">@drawable/button_selector</item>
+        <item name="android:textSize">@dimen/buttonTextSize</item>
+        <item name="android:textColor">@drawable/button_text_selector</item>
+        <item name="android:padding">@dimen/buttonPadding</item>
+    </style>
+
+    <!--Dialog title-->
+    <style name="dialogTitle">
+        <item name="android:textSize">@dimen/dialogTitle</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingBottom">@dimen/appPadding</item>
+        <item name="android:paddingTop">@dimen/appPadding</item>
+        <item name="android:paddingRight">@dimen/appPadding</item>
+    </style>
+
+    <!--Dialog message-->
+    <style name="dialogMessage">
+        <item name="android:textSize">@dimen/dialogMessage</item>
+        <item name="android:padding">@dimen/appPadding</item>
+    </style>
+</resources>

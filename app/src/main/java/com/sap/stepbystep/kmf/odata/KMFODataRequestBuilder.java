@@ -22,6 +22,7 @@ import com.sap.mobile.lib.parser.ParserException;
 import com.sap.mobile.lib.request.BaseRequest;
 import com.sap.mobile.lib.request.IRequest;
 import com.sap.mobile.lib.request.IResponse;
+import com.sap.stepbystep.R;
 import com.sap.stepbystep.kmf.android.KMFApplication;
 import com.sap.stepbystep.kmf.app.KMFAppConstants;
 import com.sap.stepbystep.kmf.data.KMFPreferences;
@@ -30,6 +31,9 @@ import com.sap.stepbystep.kmf.ui.listeners.KMFDialogProgress;
 
 //import org.apache.http.protocol.HTTP;
 //import org.apache.http.util.EntityUtils;
+
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 import java.io.File;
 import java.io.FileInputStream;

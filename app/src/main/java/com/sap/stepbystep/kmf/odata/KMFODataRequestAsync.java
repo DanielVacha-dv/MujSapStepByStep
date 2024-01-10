@@ -16,6 +16,9 @@ import com.sap.stepbystep.kmf.app.KMFAppConstants;
 import com.sap.stepbystep.kmf.helpers.KMFHelperString;
 import com.sap.stepbystep.kmf.ui.listeners.KMFDialogProgress;
 
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+
 import java.io.IOException;
 
 public class KMFODataRequestAsync

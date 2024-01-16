@@ -125,7 +125,7 @@ public class KMFOnlineManager extends KMFManager {
 
     public static boolean openOnlineStoreAsync(Context context, OnlineODataStore.OpenListener listener) throws KMFOnlineODataStoreException {
         KMFOnlineStoreOpenListener onlineStoreOpenListener = KMFOnlineStoreOpenListener.getInstance();
-
+        boolean firstTimeLogin = onlineStoreOpenListener == null;
         if (onlineStoreOpenListener.getStore() == null) {
             KMFOnlineManager.streamHandlersBuffer = new KMFStreamHandlersBuffer();
 
@@ -170,9 +170,9 @@ public class KMFOnlineManager extends KMFManager {
                 } else {
                     options.format = OnlineODataStore.PayloadFormatEnum.XML;
                 }
-                options.useCache = true;
+                //options.useCache = fa;
                 OnlineODataStore.resetCache(context, url);
-                if (listener == null) {
+                if (firstTimeLogin == true) {
                     OnlineODataStore.open(context, url, manager, onlineStoreOpenListener, options);
                     onlineStoreOpenListener.waitForCompletion();
                     if (onlineStoreOpenListener.getError() != null) {

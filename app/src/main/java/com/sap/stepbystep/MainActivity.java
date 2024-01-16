@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         getClientLogger(getApplicationContext());
-        Log.d(TAG,"onCreate");
+        Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
         mDefaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mDefaultSharedPreferencesEditor = mDefaultSharedPreferences.edit();
@@ -53,11 +53,10 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     }
 
 
-    public  ClientLogger getClientLogger(Context ctx) {
+    public ClientLogger getClientLogger(Context ctx) {
         if (logger == null) {
-            LogonCore logonCore= LogonCore.getInstance();
+            LogonCore logonCore = LogonCore.getInstance();
             logonCore.init(ctx, ctx.getPackageName());
-//            Supportability.getInstance().
             ClientLogManager logManager = Supportability.getInstance().getClientLogManager(ctx);
             logManager.setLogDestination(EnumSet.of(ClientLogDestination.CONSOLE, ClientLogDestination.FILESYSTEM));
             logger = logManager.getLogger("logger");
@@ -74,7 +73,8 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     }
 
     public void onRegister(View view) {
-        SMFLoginRepository.login(this, this);
+        boolean login = SMFLoginRepository.login(this, null);
+        Log.d(myTag, "Login succes  " + login);
     }
 
     public void onUploadLog(View view) {
@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     public void onOfflineOData(View view) {
         Log.d(myTag, "In onOfflineOData");
     }
-
 
 
     @Override
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnlineODataStore.
     /**
      * Save key with String value into the default shared preferences.
      *
-     * @param key key
+     * @param key   key
      * @param value value
      */
     public static void setDefaultSharedPreferences(String key, String value) {
